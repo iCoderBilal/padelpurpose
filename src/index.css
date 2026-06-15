@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #faf9f4;
+  --color-sand: #f1efe6;
+  --color-navy: #001f3f;
+  --color-blue: #0077b6;
+  --color-lime: #e2f700;
+  --color-lime-dark: #c8db00;
+  --color-lime-soft: #eef7a8;
+  --color-ink: #1a1a1a;
+
+  --font-display: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-hero: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-hero-body: "Manrope", system-ui, -apple-system, sans-serif;
+
+  --shadow-soft: 0 1px 2px rgba(0, 31, 63, 0.04), 0 8px 30px -12px rgba(0, 31, 63, 0.12);
+  --shadow-lift: 0 2px 4px rgba(0, 31, 63, 0.05), 0 24px 50px -20px rgba(0, 31, 63, 0.18);
+}
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-lime text-navy;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+
+  .font-hero {
+    font-family: var(--font-hero);
+  }
+
+  .font-hero-body {
+    font-family: var(--font-hero-body);
+  }
+
+  /* Generous, consistent vertical rhythm — the backbone of the premium feel */
+  .section-padding {
+    @apply px-6 py-24 md:px-10 lg:px-16 lg:py-36;
+  }
+
+  .container-wide {
+    @apply mx-auto max-w-6xl;
+  }
+
+  /* Small uppercase kicker used above every section title */
+  .kicker {
+    @apply font-sans text-[0.7rem] font-bold uppercase tracking-[0.3em];
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-lift {
+    box-shadow: var(--shadow-lift);
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .fade-in-up-delay-1 {
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+  }
+
+  .fade-in-up-delay-2 {
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.24s both;
+  }
+
+  .fade-in-up-delay-3 {
+    animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.36s both;
+  }
+
+  /* Editorial dashed borders */
+  .dash-border {
+    border: 1px dashed #000;
+  }
+
+  .dash-border-b {
+    border-bottom: 1px dashed #000;
+  }
+
+  .dash-border-l {
+    border-left: 1px dashed #000;
+  }
+
+  .dash-divide-y > :not(:last-child) {
+    border-bottom: 1px dashed #000;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Simple fade-up entrance for hero text & images */
+@keyframes cinemaRise {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cinema {
+  opacity: 0;
+  animation: cinemaRise 1.05s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.scroll-reveal-word {
+  opacity: 0.12;
+  display: inline;
+  white-space: normal;
+}
+
+body.venue-scroll-active #site-header {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-100%);
+}
+
+body.venue-scroll-active #sticky-cta {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(1rem);
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+@keyframes lightboxIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightboxImageIn {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.lightbox-backdrop {
+  animation: lightboxIn 0.32s ease-out both;
+}
+
+.lightbox-image {
+  animation: lightboxImageIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cinema {
+    opacity: 1;
+    transform: none;
+  }
+
+  .scroll-reveal-word {
+    opacity: 1 !important;
+  }
+}

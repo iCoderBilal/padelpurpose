@@ -1,0 +1,7 @@
+﻿<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600' role='img' aria-label='Evening Event'>
+  <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='#001F3F' stop-opacity='0.15'/><stop offset='100%' stop-color='#F9F9F2'/></linearGradient></defs>
+  <rect width='800' height='600' fill='url(#g)'/>
+  <rect x='80' y='80' width='640' height='440' rx='8' fill='#001F3F' opacity='0.08'/>
+  <circle cx='400' cy='300' r='80' fill='#001F3F' opacity='0.12'/>
+  <text x='400' y='520' text-anchor='middle' fill='#001F3F' font-family='sans-serif' font-size='16' font-weight='600' opacity='0.35' letter-spacing='0.15em'>EVENING EVENT</text>
+</svg>

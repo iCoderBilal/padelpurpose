@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Foundation community event">
+  <rect width="800" height="600" fill="#F9F9F2"/>
+  <rect x="50" y="80" width="700" height="440" rx="8" fill="#001F3F" opacity="0.08"/>
+  <circle cx="400" cy="280" r="80" fill="#0077B6" opacity="0.2"/>
+  <path d="M350 320 Q400 260 450 320" stroke="#001F3F" stroke-width="3" fill="none" opacity="0.3"/>
+  <circle cx="320" cy="400" r="25" fill="#001F3F" opacity="0.15"/>
+  <circle cx="400" cy="400" r="25" fill="#001F3F" opacity="0.15"/>
+  <circle cx="480" cy="400" r="25" fill="#001F3F" opacity="0.15"/>
+</svg>

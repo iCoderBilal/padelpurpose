@@ -1,0 +1,305 @@
+import { useEffect, useRef, useState } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { venue } from '../../data/content'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const FRAME_COUNT = 85
+const pad = (n) => String(n).padStart(3, '0')
+
+function buildFramePaths(setName) {
+  return Array.from({ length: FRAME_COUNT }, (_, i) => `/venue-frames/${setName}/frame-${pad(i + 1)}.webp`)
+}
+
+function buildOverlayTimeline(stepEls, hintEl) {
+  const tl = gsap.timeline({ paused: true, defaults: { ease: 'cubic-bezier(0.22, 1, 0.36, 1)' } })
+  const fade = 0.07
+
+  gsap.set(stepEls.filter(Boolean), { opacity: 0, y: 24, scale: 0.97 })
+
+  venue.scrollSteps.forEach((step, i) => {
+    const el = stepEls[i]
+    if (!el) return
+
+    tl.fromTo(el, { opacity: 0, y: 24, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: fade }, step.start)
+    tl.to(el, { opacity: 0, y: -24, scale: 1.02, duration: fade }, step.end - fade)
+  })
+
+  if (hintEl) {
+    tl.to(hintEl, { opacity: 0, duration: 0.05 }, 0)
+  }
+
+  return tl
+}
+
+export default function Venue() {
+  const sectionRef = useRef(null)
+  const canvasRef = useRef(null)
+  const stepRefs = useRef([])
+  const hintRef = useRef(null)
+  const [reducedMotion] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
+
+  useEffect(() => {
+    if (reducedMotion) return
+
+    const section = sectionRef.current
+    const canvas = canvasRef.current
+    const ctx = canvas.getContext('2d')
+
+    let images = new Array(FRAME_COUNT)
+    let highestLoadedIndex = -1
+    let lastRequestedIndex = 0
+    let lastDrawnIndex = -1
+    let currentSet = null
+    let started = false
+
+    function drawFrame(index) {
+      lastRequestedIndex = index
+      const clamped = Math.min(Math.max(index, 0), highestLoadedIndex)
+      if (clamped < 0) return
+
+      const img = images[clamped]
+      const cw = canvas.width
+      const ch = canvas.height
+      if (!img || !cw || !ch) return
+
+      const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight)
+      const dw = img.naturalWidth * scale
+      const dh = img.naturalHeight * scale
+
+      ctx.clearRect(0, 0, cw, ch)
+      ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh)
+      lastDrawnIndex = clamped
+    }
+
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1
+      const rect = canvas.getBoundingClientRect()
+      canvas.width = Math.round(rect.width * dpr)
+      canvas.height = Math.round(rect.height * dpr)
+      drawFrame(lastDrawnIndex >= 0 ? lastDrawnIndex : lastRequestedIndex)
+    }
+
+    function loadFrameSet(setName) {
+      if (currentSet === setName) return
+      currentSet = setName
+      images = new Array(FRAME_COUNT)
+      highestLoadedIndex = -1
+      lastDrawnIndex = -1
+
+      buildFramePaths(setName).forEach((src, i) => {
+        const img = new Image()
+        img.decoding = 'async'
+        img.onload = () => {
+          if (currentSet !== setName) return
+          images[i] = img
+          if (i > highestLoadedIndex) highestLoadedIndex = i
+          if (i === 0) drawFrame(0)
+          if (lastRequestedIndex > lastDrawnIndex) drawFrame(lastRequestedIndex)
+        }
+        img.src = src
+      })
+    }
+
+    // Pick the desktop vs mobile frame set, and react if the viewport
+    // crosses that boundary mid-session (resize, tablet rotation, etc).
+    const frameSetMQ = window.matchMedia('(min-width: 768px)')
+    const onFrameSetChange = (e) => {
+      if (started) loadFrameSet(e.matches ? 'desktop' : 'mobile')
+    }
+    frameSetMQ.addEventListener('change', onFrameSetChange)
+
+    // Defer the (multi-MB) frame download until the section is roughly
+    // within a viewport of the visible area, so it doesn't compete with
+    // the Hero section's assets on initial load.
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          started = true
+          loadFrameSet(frameSetMQ.matches ? 'desktop' : 'mobile')
+          io.disconnect()
+        }
+      },
+      { rootMargin: '100% 0px 100% 0px' }
+    )
+    io.observe(section)
+
+    const ro = new ResizeObserver(resizeCanvas)
+    ro.observe(canvas)
+    resizeCanvas()
+
+    // Responsive pin distance + scroll-driven frame/timeline scrubbing.
+    const mm = gsap.matchMedia()
+    mm.add(
+      {
+        isMobile: '(max-width: 767px)',
+        isTablet: '(min-width: 768px) and (max-width: 1023px)',
+        isDesktop: '(min-width: 1024px)',
+      },
+      (context) => {
+        const { isMobile, isTablet } = context.conditions
+        const endMultiplier = isMobile ? 3.0 : isTablet ? 3.5 : 3.9
+        const tl = buildOverlayTimeline(stepRefs.current, hintRef.current)
+
+        const st = ScrollTrigger.create({
+          trigger: section,
+          pin: true,
+          scrub: true,
+          start: 'top top',
+          end: () => '+=' + window.innerHeight * endMultiplier,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const p = self.progress
+            const targetFrame = Math.round(p * (FRAME_COUNT - 1))
+            if (targetFrame !== lastDrawnIndex) drawFrame(targetFrame)
+            tl.progress(p)
+          },
+          onToggle: (self) => {
+            document.body.classList.toggle('venue-scroll-active', self.isActive)
+          },
+        })
+
+        st.update()
+
+        return () => {
+          document.body.classList.remove('venue-scroll-active')
+        }
+      }
+    )
+
+    return () => {
+      mm.revert()
+      ro.disconnect()
+      io.disconnect()
+      frameSetMQ.removeEventListener('change', onFrameSetChange)
+      document.body.classList.remove('venue-scroll-active')
+    }
+  }, [reducedMotion])
+
+  if (reducedMotion) {
+    return (
+      <section id="venue" aria-label={venue.heading} className="relative w-full bg-navy px-[6%] py-12 md:px-[8%] lg:px-[10%] lg:py-20">
+        <div className="relative overflow-hidden rounded-xl md:rounded-2xl lg:rounded-[2rem]">
+          <img
+            src="/venue-frames/desktop/frame-043.webp"
+            alt=""
+            aria-hidden="true"
+            className="aspect-[3/4] w-full object-cover md:aspect-video"
+          />
+
+          <div className="pointer-events-none absolute inset-0 bg-black/50" aria-hidden="true" />
+
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-12 px-6 py-12 md:px-10 lg:px-[4vw]">
+            {venue.scrollSteps.map((step, i) => (
+              <div key={i} className="max-w-2xl text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] lg:max-w-[48vw]">
+                {step.kicker && (
+                  <p className="mb-3 font-sans text-[0.65rem] font-bold uppercase tracking-[0.35em] text-lime md:text-xs lg:mb-[0.75vw] lg:text-[0.7vw] lg:tracking-[0.35vw]">
+                    {step.kicker}
+                  </p>
+                )}
+                {step.titleLines && (
+                  <h2 className="font-hero text-3xl font-black uppercase leading-[1.05] tracking-[-0.02em] text-white md:text-4xl lg:text-[2.6vw]">
+                    {step.titleLines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </h2>
+                )}
+                {step.body && (
+                  <p
+                    className={`font-hero-body leading-relaxed text-white ${
+                      step.titleLines || step.kicker
+                        ? 'mt-5 text-base md:text-lg lg:mt-[1.2vw] lg:text-[1.05vw] lg:leading-[1.65]'
+                        : step.highlight
+                          ? 'font-sans text-lg font-bold uppercase tracking-[0.08em] md:text-xl lg:text-[1.35vw] lg:tracking-[0.1vw]'
+                          : 'text-lg font-medium md:text-xl lg:text-[1.2vw] lg:leading-[1.65]'
+                    }`}
+                  >
+                    {step.body}
+                    {step.highlight && (
+                      <>
+                        {' '}
+                        <span className="inline-block bg-lime px-1.5 py-0.5 text-navy lg:px-[0.4vw] lg:py-[0.15vw]">
+                          {step.highlight}
+                        </span>
+                      </>
+                    )}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  return (
+    <section ref={sectionRef} id="venue" className="relative h-svh w-full overflow-hidden bg-navy" aria-label={venue.heading}>
+      <div className="absolute inset-[6%] overflow-hidden rounded-xl md:inset-[8%] md:rounded-2xl lg:inset-[10%] lg:rounded-[2rem]">
+        <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
+
+        <div className="pointer-events-none absolute inset-0 bg-black/50" aria-hidden="true" />
+
+        <div className="absolute inset-0 flex items-center justify-center px-6 md:px-10 lg:px-[4vw]">
+          {venue.scrollSteps.map((step, i) => (
+            <div
+              key={i}
+              ref={(el) => (stepRefs.current[i] = el)}
+              className="absolute inset-0 flex items-center justify-center px-6 md:px-10 lg:px-[4vw]"
+              style={{ opacity: 0 }}
+            >
+              <div className="max-w-2xl text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] lg:max-w-[48vw]">
+                {step.kicker && (
+                  <p className="mb-3 font-sans text-[0.65rem] font-bold uppercase tracking-[0.35em] text-lime md:text-xs lg:mb-[0.75vw] lg:text-[0.7vw] lg:tracking-[0.35vw]">
+                    {step.kicker}
+                  </p>
+                )}
+                {step.titleLines && (
+                  <h2 className="font-hero text-3xl font-black uppercase leading-[1.05] tracking-[-0.02em] text-white md:text-4xl lg:text-[2.6vw]">
+                    {step.titleLines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </h2>
+                )}
+                {step.body && (
+                  <p
+                    className={`font-hero-body leading-relaxed text-white ${
+                      step.titleLines || step.kicker
+                        ? 'mt-5 text-base md:text-lg lg:mt-[1.2vw] lg:text-[1.05vw] lg:leading-[1.65]'
+                        : step.highlight
+                          ? 'font-sans text-lg font-bold uppercase tracking-[0.08em] md:text-xl lg:text-[1.35vw] lg:tracking-[0.1vw]'
+                          : 'text-lg font-medium md:text-xl lg:text-[1.2vw] lg:leading-[1.65]'
+                    }`}
+                  >
+                    {step.body}
+                    {step.highlight && (
+                      <>
+                        {' '}
+                        <span className="inline-block bg-lime px-1.5 py-0.5 text-navy lg:px-[0.4vw] lg:py-[0.15vw]">
+                          {step.highlight}
+                        </span>
+                      </>
+                    )}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div ref={hintRef} className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 lg:bottom-[2vw]">
+          <p className="font-sans text-xs uppercase tracking-[0.25em] text-white/60 lg:text-[0.75vw]">
+            Scroll to explore
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}

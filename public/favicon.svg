@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Padel for a Purpose">
+  <rect width="32" height="32" rx="6" fill="#001F3F"/>
+  <circle cx="16" cy="16" r="10" fill="#E2F700"/>
+  <ellipse cx="16" cy="16" rx="3" ry="10" fill="none" stroke="#001F3F" stroke-width="0.8" opacity="0.3"/>
+  <path d="M8 13C11 10 21 10 24 13" stroke="#001F3F" stroke-width="0.8" fill="none" opacity="0.3"/>
+  <path d="M8 19C11 22 21 22 24 19" stroke="#001F3F" stroke-width="0.8" fill="none" opacity="0.3"/>
+</svg>

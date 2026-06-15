@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Children empowerment programs">
+  <rect width="800" height="600" fill="#F9F9F2"/>
+  <rect x="150" y="150" width="500" height="350" rx="8" fill="#8B4513" opacity="0.15"/>
+  <circle cx="280" cy="350" r="35" fill="#E2F700" opacity="0.6"/>
+  <circle cx="400" cy="330" r="35" fill="#0077B6" opacity="0.4"/>
+  <circle cx="520" cy="350" r="35" fill="#E2F700" opacity="0.6"/>
+  <rect x="200" y="420" width="400" height="20" rx="4" fill="#001F3F" opacity="0.1"/>
+</svg>
