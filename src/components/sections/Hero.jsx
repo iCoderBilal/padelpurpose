@@ -96,7 +96,7 @@ export default function Hero() {
 
         <div
           ref={collageRef}
-          className="mx-auto mt-12 max-w-7xl overflow-hidden px-6 md:px-12 lg:mt-[4vw] lg:max-w-[88vw] lg:px-[3vw] lg:will-change-transform"
+          className="mx-auto mt-9 max-w-7xl overflow-hidden px-6 md:px-12 lg:mt-[4vw] lg:max-w-[88vw] lg:px-[3vw] lg:will-change-transform"
         >
           <div className="cinema" style={{ animationDelay: '0.55s' }}>
             <div className="flex items-end justify-center">

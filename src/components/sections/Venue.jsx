@@ -181,8 +181,8 @@ export default function Venue() {
 
   if (reducedMotion) {
     return (
-      <section id="venue" aria-label={venue.heading} className="relative w-full bg-navy px-[6%] py-12 md:px-[8%] lg:px-[10%] lg:py-20">
-        <div className="relative overflow-hidden rounded-xl md:rounded-2xl lg:rounded-[2rem]">
+      <section id="venue" aria-label={venue.heading} className="relative w-full bg-navy py-12 md:py-16 lg:py-20">
+        <div className="relative mx-auto w-full max-w-[90vw] overflow-hidden">
           <img
             src="/venue-frames/desktop/frame-043.webp"
             alt=""
@@ -190,20 +190,15 @@ export default function Venue() {
             className="aspect-[3/4] w-full object-cover md:aspect-video"
           />
 
-          <div className="pointer-events-none absolute inset-0 bg-black/50" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 bg-black/58" aria-hidden="true" />
 
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-12 px-6 py-12 md:px-10 lg:px-[4vw]">
             {venue.scrollSteps.map((step, i) => (
               <div key={i} className="max-w-2xl text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] lg:max-w-[48vw]">
-                {step.kicker && (
-                  <p className="mb-3 font-sans text-[0.65rem] font-bold uppercase tracking-[0.35em] text-lime md:text-xs lg:mb-[0.75vw] lg:text-[0.7vw] lg:tracking-[0.35vw]">
-                    {step.kicker}
-                  </p>
-                )}
                 {step.titleLines && (
-                  <h2 className="font-hero text-3xl font-black uppercase leading-[1.05] tracking-[-0.02em] text-white md:text-4xl lg:text-[2.6vw]">
+                  <h2 className="font-hero font-black uppercase leading-[1.05] tracking-[-0.02em] text-white">
                     {step.titleLines.map((line) => (
-                      <span key={line} className="block">
+                      <span key={line} className="block text-[38px] md:text-5xl lg:text-[4.1vw]">
                         {line}
                       </span>
                     ))}
@@ -212,7 +207,7 @@ export default function Venue() {
                 {step.body && (
                   <p
                     className={`font-hero-body leading-relaxed text-white ${
-                      step.titleLines || step.kicker
+                      step.titleLines
                         ? 'mt-5 text-base md:text-lg lg:mt-[1.2vw] lg:text-[1.05vw] lg:leading-[1.65]'
                         : step.highlight
                           ? 'font-sans text-lg font-bold uppercase tracking-[0.08em] md:text-xl lg:text-[1.35vw] lg:tracking-[0.1vw]'
@@ -239,11 +234,11 @@ export default function Venue() {
   }
 
   return (
-    <section ref={sectionRef} id="venue" className="relative h-svh w-full overflow-hidden bg-navy" aria-label={venue.heading}>
-      <div className="absolute inset-[6%] overflow-hidden rounded-xl md:inset-[8%] md:rounded-2xl lg:inset-[10%] lg:rounded-[2rem]">
+    <section ref={sectionRef} id="venue" className="relative h-svh w-full overflow-hidden bg-[#FAF9F4]" aria-label={venue.heading}>
+      <div className="absolute inset-y-[6%] left-1/2 w-full max-w-[90vw] -translate-x-1/2 overflow-hidden md:inset-y-[8%] lg:inset-y-[10%]">
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
 
-        <div className="pointer-events-none absolute inset-0 bg-black/50" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 bg-black/58" aria-hidden="true" />
 
         <div className="absolute inset-0 flex items-center justify-center px-6 md:px-10 lg:px-[4vw]">
           {venue.scrollSteps.map((step, i) => (
@@ -254,15 +249,10 @@ export default function Venue() {
               style={{ opacity: 0 }}
             >
               <div className="max-w-2xl text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] lg:max-w-[48vw]">
-                {step.kicker && (
-                  <p className="mb-3 font-sans text-[0.65rem] font-bold uppercase tracking-[0.35em] text-lime md:text-xs lg:mb-[0.75vw] lg:text-[0.7vw] lg:tracking-[0.35vw]">
-                    {step.kicker}
-                  </p>
-                )}
                 {step.titleLines && (
-                  <h2 className="font-hero text-3xl font-black uppercase leading-[1.05] tracking-[-0.02em] text-white md:text-4xl lg:text-[2.6vw]">
+                  <h2 className="font-hero font-black uppercase leading-[1.05] tracking-[-0.02em] text-white">
                     {step.titleLines.map((line) => (
-                      <span key={line} className="block">
+                      <span key={line} className="block text-[38px] md:text-5xl lg:text-[4.1vw]">
                         {line}
                       </span>
                     ))}
@@ -271,7 +261,7 @@ export default function Venue() {
                 {step.body && (
                   <p
                     className={`font-hero-body leading-relaxed text-white ${
-                      step.titleLines || step.kicker
+                      step.titleLines
                         ? 'mt-5 text-base md:text-lg lg:mt-[1.2vw] lg:text-[1.05vw] lg:leading-[1.65]'
                         : step.highlight
                           ? 'font-sans text-lg font-bold uppercase tracking-[0.08em] md:text-xl lg:text-[1.35vw] lg:tracking-[0.1vw]'

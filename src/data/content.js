@@ -61,7 +61,6 @@ export const venue = {
   image: { src: '/images/venue-estate.svg', alt: 'Luxury Bridgehampton estate with pool and outdoor lounge' },
   scrollSteps: [
     {
-      kicker: 'The Setting',
       titleLines: ['Private Residence,', 'Bridgehampton'],
       start: 0.02,
       end: 0.34,
@@ -93,10 +92,10 @@ export const venueGallery = [
 export const program = {
   heading: 'Program',
   schedule: [
-    { time: '12:30 PM', event: 'Team check-in' },
-    { time: '1:00 PM', event: 'Tournament & Pool Party Begin' },
-    { time: '4:30 PM', event: 'Finals Begin' },
-    { time: '5:15 PM', event: 'Award Ceremony' },
+    { time: '12:30 PM', event: 'Team check-in', icon: 'checkin' },
+    { time: '1:00 PM', event: 'Tournament & Pool Party Begin', icon: 'party' },
+    { time: '4:30 PM', event: 'Finals Begin', icon: 'finals' },
+    { time: '5:15 PM', event: 'Award Ceremony', icon: 'award' },
   ],
 }
 
