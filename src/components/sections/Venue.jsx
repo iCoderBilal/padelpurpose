@@ -83,6 +83,8 @@ export default function Venue() {
       drawFrame(lastDrawnIndex >= 0 ? lastDrawnIndex : lastRequestedIndex)
     }
 
+    const BATCH = 5 // frames per idle task
+
     function loadFrameSet(setName) {
       if (currentSet === setName) return
       currentSet = setName
@@ -90,7 +92,10 @@ export default function Venue() {
       highestLoadedIndex = -1
       lastDrawnIndex = -1
 
-      buildFramePaths(setName).forEach((src, i) => {
+      const paths = buildFramePaths(setName)
+
+      // Load frame 0 immediately so the canvas has something to show
+      const loadOne = (i) => {
         const img = new Image()
         img.decoding = 'async'
         img.fetchPriority = 'low'
@@ -101,8 +106,33 @@ export default function Venue() {
           if (i === 0) drawFrame(0)
           if (lastRequestedIndex > lastDrawnIndex) drawFrame(lastRequestedIndex)
         }
-        img.src = src
-      })
+        img.src = paths[i]
+      }
+
+      loadOne(0)
+
+      // Load the rest in small idle batches so they don't saturate the
+      // network and block other page resources.
+      let batchStart = 1
+      const scheduleBatch = () => {
+        if (batchStart >= paths.length || currentSet !== setName) return
+        const end = Math.min(batchStart + BATCH, paths.length)
+        for (let i = batchStart; i < end; i++) loadOne(i)
+        batchStart = end
+        if (batchStart < paths.length) {
+          if (typeof requestIdleCallback !== 'undefined') {
+            requestIdleCallback(scheduleBatch, { timeout: 300 })
+          } else {
+            setTimeout(scheduleBatch, 50)
+          }
+        }
+      }
+
+      if (typeof requestIdleCallback !== 'undefined') {
+        requestIdleCallback(scheduleBatch, { timeout: 300 })
+      } else {
+        setTimeout(scheduleBatch, 50)
+      }
     }
 
     // Pick the desktop vs mobile frame set, and react if the viewport
@@ -113,20 +143,30 @@ export default function Venue() {
     }
     frameSetMQ.addEventListener('change', onFrameSetChange)
 
-    // Defer the (multi-MB) frame download until the section is roughly
-    // within a viewport of the visible area, so it doesn't compete with
-    // the Hero section's assets on initial load.
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          started = true
-          loadFrameSet(frameSetMQ.matches ? 'desktop' : 'mobile')
-          io.disconnect()
-        }
-      },
-      { rootMargin: '100% 0px 100% 0px' }
-    )
-    io.observe(section)
+    // Only start loading after the page `load` event so frames never
+    // compete with critical Hero / font / above-the-fold resources.
+    // rootMargin '0px 0px 150% 0px' gives a ~1.5-viewport head-start
+    // as the user scrolls down toward the Venue section.
+    let ioRef = null
+    const wrappedObserve = () => {
+      ioRef = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            started = true
+            loadFrameSet(frameSetMQ.matches ? 'desktop' : 'mobile')
+            ioRef.disconnect()
+          }
+        },
+        { rootMargin: '0px 0px 150% 0px' }
+      )
+      ioRef.observe(section)
+    }
+
+    if (document.readyState === 'complete') {
+      wrappedObserve()
+    } else {
+      window.addEventListener('load', wrappedObserve, { once: true })
+    }
 
     const ro = new ResizeObserver(resizeCanvas)
     ro.observe(canvas)
@@ -174,7 +214,8 @@ export default function Venue() {
     return () => {
       mm.revert()
       ro.disconnect()
-      io.disconnect()
+      if (ioRef) ioRef.disconnect()
+      window.removeEventListener('load', wrappedObserve)
       frameSetMQ.removeEventListener('change', onFrameSetChange)
       document.body.classList.remove('venue-scroll-active')
     }
