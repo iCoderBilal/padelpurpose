@@ -4,7 +4,7 @@ import Logo from '../brand/Logo'
 export default function Footer() {
   return (
     <footer className="border-t border-navy/10 bg-navy text-white">
-      <div className="section-padding container-wide">
+      <div className="mx-auto max-w-6xl px-6 py-24 md:px-10 md:py-24 lg:max-w-[80vw] lg:px-[4vw] lg:py-36">
         <div className="grid gap-12 md:grid-cols-3">
           <div>
             <Logo size="sm" className="[&_span]:text-white [&_p]:text-lime [&_.text-blue]:text-lime/80" />
@@ -51,8 +51,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 px-6 py-6 md:px-10">
-        <div className="container-wide flex flex-col items-center justify-between gap-4 sm:flex-row">
+      <div className="border-t border-white/10 py-6 lg:py-[1.5vw]">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 sm:flex-row md:px-10 lg:max-w-[80vw] lg:px-[4vw]">
           <a
             href={ZEFFY_URL}
             target="_blank"

@@ -5,11 +5,11 @@ import { venue } from '../../data/content'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const FRAME_COUNT = 85
+const FRAME_COUNTS = { desktop: 85, mobile: 84 }
 const pad = (n) => String(n).padStart(3, '0')
 
 function buildFramePaths(setName) {
-  return Array.from({ length: FRAME_COUNT }, (_, i) => `/venue-frames/${setName}/frame-${pad(i + 1)}.webp`)
+  return Array.from({ length: FRAME_COUNTS[setName] }, (_, i) => `/venue-frames/${setName}/frame-${pad(i + 1)}.webp`)
 }
 
 function buildOverlayTimeline(stepEls, hintEl) {
@@ -49,7 +49,7 @@ export default function Venue() {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
 
-    let images = new Array(FRAME_COUNT)
+    let images = []
     let highestLoadedIndex = -1
     let lastRequestedIndex = 0
     let lastDrawnIndex = -1
@@ -86,7 +86,7 @@ export default function Venue() {
     function loadFrameSet(setName) {
       if (currentSet === setName) return
       currentSet = setName
-      images = new Array(FRAME_COUNT)
+      images = new Array(FRAME_COUNTS[setName])
       highestLoadedIndex = -1
       lastDrawnIndex = -1
 
@@ -154,7 +154,7 @@ export default function Venue() {
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             const p = self.progress
-            const targetFrame = Math.round(p * (FRAME_COUNT - 1))
+            const targetFrame = Math.round(p * ((FRAME_COUNTS[currentSet] ?? 85) - 1))
             if (targetFrame !== lastDrawnIndex) drawFrame(targetFrame)
             tl.progress(p)
           },

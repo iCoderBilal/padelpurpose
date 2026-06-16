@@ -3,7 +3,7 @@ import { stats } from '../../data/content'
 export default function StatsBar() {
   return (
     <section className="bg-navy py-14 md:py-16 lg:py-[4vw]" aria-label="Event statistics">
-      <div className="container-wide grid grid-cols-2 gap-y-10 px-6 md:grid-cols-4 md:gap-y-0 md:px-10 lg:px-[4vw]">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-y-10 px-6 md:grid-cols-4 md:gap-y-0 md:px-10 lg:max-w-[80vw] lg:px-[4vw]">
         {stats.map((stat, i) => (
           <div
             key={stat.label}

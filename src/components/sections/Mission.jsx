@@ -3,28 +3,47 @@ import { ScrollRevealParagraph } from '../ui/ScrollRevealText'
 import { useReveal } from '../../hooks/useReveal'
 import { useScrollRevealOpacity } from '../../hooks/useScrollRevealOpacity'
 
-function MissionPhoto({ pillar, frameClass, stagger }) {
+function MissionPhoto({ pillar, frameClass, sizeClass, stagger }) {
   const ref = useScrollRevealOpacity(stagger)
 
   return (
     <figure
       ref={ref}
-      className={`scroll-reveal-item absolute w-[36%] max-w-[8.5rem] overflow-hidden border border-navy/10 bg-cream shadow-lift sm:max-w-[13rem] sm:w-[42%] lg:w-[14vw] lg:max-w-none ${frameClass}`}
+      className={`scroll-reveal-item absolute overflow-hidden border border-navy/10 bg-cream shadow-lift ${frameClass}`}
     >
       <img
         src={pillar.src}
         alt={pillar.alt}
         loading="lazy"
-        className="aspect-[4/5] w-full object-cover"
+        width={208}
+        height={260}
+        className={`block ${sizeClass}`}
       />
     </figure>
   )
 }
 
+const photoSize =
+  'h-[10.625rem] w-[8.5rem] sm:h-[13.25rem] sm:w-[13rem] lg:h-[15vw] lg:w-[14vw]'
+
+const centerSize =
+  'h-[7.5rem] w-[7.5rem] sm:h-[11rem] sm:w-[11rem] lg:h-[15vw] lg:w-[14vw]'
+
 const collageFrames = [
-  'left-[10%] top-[14%] z-10 rotate-[7deg] sm:left-[10%] sm:top-[12%] lg:left-[12%] lg:top-[10%] lg:rotate-[8deg]',
-  'left-1/2 top-0 z-30 -translate-x-1/2 rotate-0',
-  'right-[10%] top-[10%] z-20 -rotate-[7deg] sm:right-[10%] sm:top-[8%] lg:right-[12%] lg:top-[6%] lg:-rotate-[8deg]',
+  {
+    frameClass:
+      'left-0 top-[18%] z-20 rotate-[7deg] sm:left-[1%] sm:top-[16%] lg:left-[12%] lg:top-[10%] lg:z-10 lg:rotate-[8deg]',
+    sizeClass: photoSize,
+  },
+  {
+    frameClass: 'left-1/2 top-0 z-30 -translate-x-1/2 rotate-0',
+    sizeClass: centerSize,
+  },
+  {
+    frameClass:
+      'right-0 top-[14%] z-20 -rotate-[7deg] sm:right-[1%] sm:top-[12%] lg:right-[12%] lg:top-[6%] lg:-rotate-[8deg]',
+    sizeClass: photoSize,
+  },
 ]
 
 export default function Mission() {
@@ -79,14 +98,15 @@ export default function Mission() {
           {/* Overlapping tilted photo stack — after closing line */}
           <div className="dash-border-t px-4 pb-0 pt-0 md:px-8 md:pb-0 md:pt-0 lg:px-[2vw] lg:pb-[0vw] lg:pt-[0vw]">
             <div
-              className="relative mx-auto h-[14rem] w-full max-w-[17rem] sm:h-[19rem] sm:max-w-xl md:h-[22rem] lg:h-[24vw] lg:max-w-none"
+              className="relative mx-auto h-[16rem] w-full max-w-[22rem] sm:h-[21rem] sm:max-w-[32rem] md:h-[24rem] md:max-w-[36rem] lg:h-[23vw] lg:max-w-none"
               aria-hidden="false"
             >
               {mission.pillars.map((pillar, index) => (
                 <MissionPhoto
                   key={pillar.src}
                   pillar={pillar}
-                  frameClass={collageFrames[index]}
+                  frameClass={collageFrames[index].frameClass}
+                  sizeClass={collageFrames[index].sizeClass}
                   stagger={index}
                 />
               ))}

@@ -13,7 +13,7 @@ export default function Program() {
           </span>
         </h2>
 
-        <ol className="container-wide grid list-none grid-cols-2 gap-y-10 px-6 md:grid-cols-4 md:gap-y-0 md:px-10 lg:px-[4vw]">
+        <ol className="mx-auto grid max-w-6xl list-none grid-cols-2 gap-y-10 px-6 md:grid-cols-4 md:gap-y-0 md:px-10 lg:max-w-[80vw] lg:px-[4vw]">
           {program.schedule.map((item, i) => (
             <li
               key={item.time}

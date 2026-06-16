@@ -1,6 +1,34 @@
 import { tickets, ticketsSection } from '../../data/content'
 import { ZEFFY_URL } from '../../constants/links'
 import { useReveal } from '../../hooks/useReveal'
+import Button from '../ui/Button'
+
+function GetTicketButton({ className = '' }) {
+  return (
+    <Button
+      href={ZEFFY_URL}
+      external
+      variant="lime"
+      size="md"
+      className={`min-w-[11rem] gap-2.5 shadow-lift hover:shadow-[0_14px_36px_rgba(0,31,63,0.14)] lg:min-w-[12vw] lg:gap-[0.45vw] lg:px-[1.5vw] lg:py-[0.8vw] lg:text-[0.72vw] ${className}`}
+    >
+      Get Ticket
+      <svg
+        className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1 lg:h-[0.9vw] lg:w-[0.9vw]"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14" />
+        <path d="m13 6 6 6-6 6" />
+      </svg>
+    </Button>
+  )
+}
 
 function TicketFeature({ ticket, index }) {
   return (
@@ -38,20 +66,12 @@ function TicketFeature({ ticket, index }) {
               ))}
             </p>
 
-            <div className="mt-6 flex flex-wrap items-end justify-between gap-4 lg:mt-[1.2vw]">
+            <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between lg:mt-[1.2vw]">
               <p className="font-hero text-4xl font-black tracking-[-0.03em] text-navy lg:text-[2.8vw]">
                 {ticket.price}
               </p>
 
-              <a
-                href={ZEFFY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-navy bg-navy px-6 py-3 font-sans text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-transparent hover:text-navy lg:px-[1.2vw] lg:py-[0.65vw] lg:text-[0.68vw]"
-              >
-                Get Ticket
-                <span aria-hidden="true">→</span>
-              </a>
+              <GetTicketButton className="w-full sm:w-auto" />
             </div>
           </div>
         </div>
