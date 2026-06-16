@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { venueGallery } from '../../data/content'
+import { venue, venueGallery } from '../../data/content'
 import LightboxGallery from '../ui/LightboxGallery'
 
 const START_INDEX = 0
@@ -31,7 +31,7 @@ function ArrowButton({ direction, onClick, disabled }) {
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/25 bg-navy/80 text-white backdrop-blur-sm transition-all duration-300 hover:border-lime hover:bg-navy hover:text-lime disabled:pointer-events-none disabled:opacity-30 lg:h-[2.8vw] lg:w-[2.8vw]"
+      className="flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-full border border-navy/15 bg-white text-navy shadow-soft transition-all duration-300 hover:border-navy hover:bg-navy hover:text-lime disabled:pointer-events-none disabled:opacity-30 lg:h-[2.8vw] lg:w-[2.8vw]"
     >
       <svg
         width="18"
@@ -72,7 +72,11 @@ export default function VenueGallery() {
 
   return (
     <>
-      <section id="venue-gallery" aria-label="Estate gallery" className="bg-[#001224] py-10 md:py-14 lg:py-[3vw]">
+      <section id="venue-gallery" aria-label="Estate gallery" className="bg-cream py-10 md:py-14 lg:py-[3vw]">
+        <p className="mb-6 text-center font-sans text-[0.65rem] font-bold uppercase tracking-[0.24em] text-navy/45 md:mb-8 md:text-xs lg:mb-[1.5vw] lg:text-[0.72vw] lg:tracking-[0.2vw]">
+          {venue.galleryCaption}
+        </p>
+
         <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 md:gap-4 md:px-8 lg:max-w-[89vw] lg:gap-[1vw] lg:px-0">
           <ArrowButton direction="prev" onClick={prev} disabled={index === 0} />
 
@@ -91,7 +95,7 @@ export default function VenueGallery() {
                     type="button"
                     onClick={() => setLightboxIndex(imageIndex)}
                     aria-label={`View full size: ${image.alt}`}
-                    className="relative block w-full cursor-pointer overflow-hidden bg-navy/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
+                    className="relative block w-full cursor-pointer overflow-hidden border border-navy/10 bg-sand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
                   >
                     <div>
                       <img

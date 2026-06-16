@@ -93,6 +93,7 @@ export default function Venue() {
       buildFramePaths(setName).forEach((src, i) => {
         const img = new Image()
         img.decoding = 'async'
+        img.fetchPriority = 'low'
         img.onload = () => {
           if (currentSet !== setName) return
           images[i] = img
@@ -197,9 +198,16 @@ export default function Venue() {
             {venue.scrollSteps.map((step, i) => (
               <div key={i} className="mx-auto max-w-2xl text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] lg:max-w-[70vw]">
                 {step.titleLines && (
-                  <h2 className="font-hero font-semibold uppercase leading-tight tracking-[-0.01em] text-white">
-                    {step.titleLines.map((line) => (
-                      <span key={line} className="block text-2xl md:text-3xl lg:text-[2.8vw]">
+                  <h2 className="font-hero font-semibold uppercase leading-tight tracking-[-0.01em]">
+                    {step.titleLines.map((line, lineIndex) => (
+                      <span
+                        key={line}
+                        className={
+                          lineIndex === 1
+                            ? 'mt-2 inline-block bg-lime px-2 py-0.5 text-2xl text-navy md:text-3xl lg:mt-[0.5vw] lg:px-[0.5vw] lg:py-[0.25vw] lg:text-[2.8vw]'
+                            : 'block text-2xl text-white md:text-3xl lg:text-[2.8vw]'
+                        }
+                      >
                         {line}
                       </span>
                     ))}
@@ -253,9 +261,16 @@ export default function Venue() {
             >
               <div className="mx-auto max-w-2xl text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] lg:max-w-[70vw]">
                 {step.titleLines && (
-                  <h2 className="font-hero font-semibold uppercase leading-tight tracking-[-0.01em] text-white">
-                    {step.titleLines.map((line) => (
-                      <span key={line} className="block text-3xl md:text-4xl lg:text-[3.5vw]">
+                  <h2 className="font-hero font-semibold uppercase leading-tight tracking-[-0.01em]">
+                    {step.titleLines.map((line, lineIndex) => (
+                      <span
+                        key={line}
+                        className={
+                          lineIndex === 1
+                            ? 'mt-2 inline-block bg-lime px-2 py-0.5 text-[27px] text-navy md:text-4xl lg:mt-[0.5vw] lg:px-[0.5vw] lg:py-[0.25vw] lg:text-[3.5vw]'
+                            : 'block text-[27px] text-white md:text-4xl lg:text-[3.5vw]'
+                        }
+                      >
                         {line}
                       </span>
                     ))}
@@ -265,10 +280,10 @@ export default function Venue() {
                   <p
                     className={`font-hero-body leading-relaxed text-white lg:max-w-[45vw] ${
                       step.titleLines
-                        ? 'mt-5 text-base md:text-lg lg:mt-[1.2vw] lg:text-[1.05vw] lg:leading-[1.65]'
+                        ? 'mt-5 text-sm md:text-lg lg:mt-[1.2vw] lg:text-[1.05vw] lg:leading-[1.65]'
                         : step.highlight
-                          ? 'font-sans text-lg font-bold uppercase tracking-[0.08em] md:text-xl lg:text-[1.35vw] lg:tracking-[0.1vw]'
-                          : 'text-md md:text-lg lg:text-[1.2vw]'
+                          ? 'font-sans text-md font-bold uppercase tracking-[0.08em] md:text-xl lg:text-[1.35vw] lg:tracking-[0.1vw]'
+                          : 'text-sm md:text-lg lg:text-[1.2vw]'
                     }`}
                   >
                     {step.body}
@@ -288,7 +303,7 @@ export default function Venue() {
         </div>
 
         <div ref={hintRef} className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 lg:bottom-[2vw]">
-          <p className="font-sans text-xs uppercase tracking-[0.25em] text-white/60 lg:text-[0.75vw]">
+          <p className="font-sans text-xs text-center uppercase tracking-[0.25em] text-white/60 lg:text-[0.75vw]">
             Scroll to explore
           </p>
         </div>

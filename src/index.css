@@ -231,6 +231,25 @@ body.lightbox-open {
   animation: lightboxImageIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+@keyframes pressMarquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.press-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: pressMarquee 45s linear infinite;
+}
+
+.press-marquee-track:hover {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -253,5 +272,13 @@ body.lightbox-open {
   .scroll-reveal-word,
   .scroll-reveal-item {
     opacity: 1 !important;
+  }
+
+  .press-marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 2rem;
   }
 }

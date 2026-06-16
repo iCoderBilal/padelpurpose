@@ -86,6 +86,7 @@ export const venue = {
       end: 0.98,
     },
   ],
+  galleryCaption: 'More views of the property',
 }
 
 export const venueGallery = [
@@ -117,26 +118,8 @@ export const ticketsSection = {
 
 export const tickets = [
   {
-    id: 'attendee',
-    tagline: 'Pool Party & Spectator',
-    name: 'Event Attendee',
-    price: '$150',
-    highlight: false,
-    image: '/images/ticket-1.jpg',
-    includes: [
-      'Open bar',
-      'Delicious chef-curated food',
-      'Live DJ and entertainment',
-      'Access to watch top pros compete',
-      'Great networking opportunities',
-      'Pool party access',
-      'And more surprises throughout the day.',
-    ],
-  },
-  {
     id: 'player',
-    tagline: 'Pro-Am Player',
-    name: 'VIP Amateur Player',
+    name: 'Player/Party Ticket',
     price: '$2,000',
     highlight: true,
     image: '/images/ticket-2.jpg',
@@ -150,11 +133,27 @@ export const tickets = [
       'And surprises throughout the day',
     ],
   },
+  {
+    id: 'attendee',
+    name: 'Event Attendee Ticket',
+    price: '$150',
+    highlight: false,
+    image: '/images/ticket-1.jpg',
+    includes: [
+      'Open bar',
+      'Delicious chef-curated food',
+      'Live DJ and entertainment',
+      'Access to watch top pros compete',
+      'Great networking opportunities',
+      'Pool party access',
+      'And more surprises throughout the day.',
+    ],
+  },
 ]
 
 export const sponsorshipTiers = [
   {
-    name: 'Diamond Dog Sponsor',
+    name: 'Diamond Dog',
     price: '$100,000',
     featured: true,
     badge: 'Presenting Sponsor',
@@ -177,7 +176,7 @@ export const sponsorshipTiers = [
     ],
   },
   {
-    name: 'Champion for Change Sponsor',
+    name: 'Champion For Change',
     price: '$50,000',
     benefits: [
       'Primary event sponsorship recognition',
@@ -195,7 +194,7 @@ export const sponsorshipTiers = [
     ],
   },
   {
-    name: 'Platinum Paw Sponsor',
+    name: 'Platinum Paw',
     price: '$25,000',
     benefits: [
       'Logo placement on welcome signage',
@@ -211,7 +210,7 @@ export const sponsorshipTiers = [
     ],
   },
   {
-    name: 'Golden Collar Sponsor',
+    name: 'Golden Collar',
     price: '$10,000',
     benefits: [
       'Logo placement on signage, apparel, and press',
@@ -225,7 +224,7 @@ export const sponsorshipTiers = [
     ],
   },
   {
-    name: 'Top Dog Sponsor',
+    name: 'Top Dog',
     price: '$5,000',
     benefits: [
       'Logo placement on welcome signage',
@@ -238,7 +237,7 @@ export const sponsorshipTiers = [
     ],
   },
   {
-    name: 'Underdog Hero Sponsor',
+    name: 'Underdog Hero',
     price: '$2,500',
     benefits: [
       'Logo featured on shared sponsor banner',
@@ -248,7 +247,7 @@ export const sponsorshipTiers = [
     ],
   },
   {
-    name: 'Tail Wagger Sponsor',
+    name: 'Tail Wagger',
     price: '$1,000',
     benefits: [
       'Logo on shared sponsor banner',
@@ -258,7 +257,7 @@ export const sponsorshipTiers = [
     ],
   },
   {
-    name: 'Puppy Love Supporter',
+    name: 'Puppy Love',
     price: '$500',
     benefits: [
       'Logo on shared sponsor banner',
@@ -269,89 +268,107 @@ export const sponsorshipTiers = [
 ]
 
 export const sponsorshipSection = {
-  label: 'Get Involved',
-  heading: 'Sponsorship Opportunities',
+  label: 'Sponsorship',
+  heading: 'Become A Champion For Change',
   subtitle:
     'Partner with us to create lasting impact for animals, children, and communities.',
-  zeffyNote: 'All sponsorship tiers and packages are listed on Zeffy.',
-  featured: {
-    badge: 'Presenting Sponsor',
-    name: 'Diamond Dog Sponsor',
-    price: '$100,000',
-    summary:
-      'Premier visibility across the event, padel court, press, and The Brady Hunter Foundation network.',
-  },
+  previewCount: 5,
 }
 
 export const pastEvents = [
-  {
-    id: 'hamptons',
-    label: 'Hamptons 2025',
-    stat: '200+ in attendance at our first Hamptons fundraiser',
-    videoUrl: 'https://www.instagram.com/reels/DOJoAjajm89/',
-    images: [
-      { src: '/images/hero-1.jpg', alt: 'Guests and a dog at Padel for a Purpose' },
-      { src: '/images/hero-3.jpg', alt: 'Padel court action at golden hour' },
-      { src: '/images/hero-4.jpg', alt: 'Guests celebrating at the charity event' },
-      { src: '/images/hero-6.jpg', alt: 'Evening padel match under the lights' },
-    ],
-  },
   {
     id: 'miami',
     label: 'Miami 2026',
     stat: '600+ guests · 40+ sponsors · 15+ raffle items',
     videoUrl: 'https://www.instagram.com/reels/DVRYyRujrJZ/',
     images: [
-      { src: '/images/hero-2.jpg', alt: 'Friends gathered at the Padel for a Purpose pool party' },
-      { src: '/images/hero-5.jpg', alt: 'A dog with guests at the foundation event' },
-      { src: '/images/hero-8.jpg', alt: 'Friends gathered at the pool party' },
-      { src: '/images/hero-9.jpg', alt: 'Padel court action at golden hour' },
+      { src: '/images/miami/miami-1.jpg', alt: 'Flyboard water show with the Miami skyline at night' },
+      { src: '/images/miami/miami-2.jpg', alt: 'Guest playing on the Miami Mobile Golf simulator' },
+      { src: '/images/miami/miami-3.jpg', alt: 'The Farmer\'s Dog booth beside the padel courts at Padel for Purpose Miami' },
+      { src: '/images/miami/miami-4.jpg', alt: 'Guests enjoying food and drinks at the Miami event' },
+    ],
+  },
+  {
+    id: 'hamptons',
+    label: 'Hamptons 2025',
+    stat: '200+ in attendance at our first Hamptons fundraiser',
+    videoUrl: 'https://www.instagram.com/reels/DOJoAjajm89/',
+    images: [
+      { src: '/images/hamptons/hamptons-1.jpg', alt: 'Padel tournament winners with medals on court at Padel for Purpose Hamptons' },
+      { src: '/images/hamptons/hamptons-2.jpg', alt: 'Guest with a dog at The Brady Hunter Foundation step and repeat' },
+      { src: '/images/hamptons/hamptons-3.jpg', alt: 'Padel match action on the Hamptons court' },
+      { src: '/images/hamptons/hamptons-4.jpg', alt: 'Guests with a French bulldog at the Hamptons fundraiser' },
     ],
   },
 ]
 
+export const pressSection = {
+  label: 'In The News',
+  heading: 'Press Coverage',
+  subtitle: 'Sport, style, and philanthropy — as seen in leading publications.',
+}
+
 export const press = [
   {
     publication: "Dan's Papers",
-    logo: '/images/press/dans-papers.png',
+    logo: '/images/press/danis.png',
     headline: 'The Brady Hunter Foundation Serves for a Cause',
+    url: 'https://www.danspapers.com/2025/09/the-brady-hunter-foundation-serves-for-a-cause/',
   },
   {
     publication: 'Times Square Chronicles',
-    logo: '/images/press/times-square-chronicles.png',
+    logo: '/images/press/t2omline.png',
     headline: 'The Padel Party Charity Of The Year!',
+    url: 'https://t2conline.com/prince-mario-max-schaumburg-lippe-the-padel-party-charity-if-the-year/',
   },
   {
     publication: 'Impact Wealth',
     logo: '/images/press/impact-wealth.png',
     headline: 'Game, Set, Match! Padel for a Purpose Hits East Hampton',
+    url: 'https://impactwealth.org/game-set-match-padel-for-a-purpose-hits-east-hampton/',
   },
   {
     publication: '27east',
-    logo: '/images/press/27east.png',
+    logo: '/images/press/southampton.png',
+    logoWide: true,
     headline: 'Padel for a Purpose Hits East Hampton',
+    url: 'https://www.27east.com/east-hampton-press/article_eb1c122e-12b5-5991-8fb7-0a20c15a4e7e.html',
   },
   {
     publication: 'RESIDENT',
     logo: '/images/press/resident.png',
     headline: 'Where Sport, Style, and Philanthropy Converged in Miami',
+    url: 'https://resident.com/press-releases/2026/02/26/padel-for-a-purpose-where-sport-style-and-philanthropy-converged-in-miami-with-the-brady-hunter-foundation',
   },
   {
     publication: 'Haute Living',
     logo: '/images/press/haute-living.png',
     headline: 'Where Sport, Style, and Philanthropy Converged in Miami',
+    url: 'https://hauteliving.com/2026/02/padel-for-a-purpose-where-sport-style-and-philanthropy-converged-in-miami/785451/',
   },
   {
     publication: "L'Etage Magazine",
-    logo: '/images/press/letage.jpg',
+    logo: '/images/press/letage.png',
     headline: 'Padel for Purpose Unites Miami for Animals and Children',
+    url: 'https://letagemagazine.com/padel-for-purpose-unites-miami-for-animals-and-children/',
   },
   {
     publication: '39 WSFL',
-    logo: '/images/press/wsfl.png',
+    logo: '/images/press/wsft.png',
     headline: 'Brady Hunter Foundation brings Padel for Purpose to Miami',
+    url: 'https://www.wsfltv.com/news/local-news/brady-hunter-foundation-brings-padel-for-purpose-fundraising-event-to-miami-february-21',
   },
 ]
+
+export const contactSection = {
+  badge: 'August 2, 2026 · Bridgehampton',
+  heading: 'Join Us on the Court',
+  body:
+    'Every ticket and sponsorship helps build a forever home for animals and brighter futures for children in need.',
+  ctaPrimary: 'Tickets & Sponsorships',
+  ctaSecondary: 'Contact Paige',
+  contactLabel: 'Custom sponsorship packages & event details',
+}
 
 export const navLinks = [
   { label: 'Mission', href: '#mission' },

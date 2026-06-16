@@ -9,7 +9,7 @@ function MissionPhoto({ pillar, frameClass, stagger }) {
   return (
     <figure
       ref={ref}
-      className={`scroll-reveal-item absolute w-[46%] max-w-[11rem] overflow-hidden border border-navy/10 bg-cream shadow-lift sm:max-w-[13rem] sm:w-[42%] lg:w-[14vw] lg:max-w-none ${frameClass}`}
+      className={`scroll-reveal-item absolute w-[36%] max-w-[8.5rem] overflow-hidden border border-navy/10 bg-cream shadow-lift sm:max-w-[13rem] sm:w-[42%] lg:w-[14vw] lg:max-w-none ${frameClass}`}
     >
       <img
         src={pillar.src}
@@ -22,9 +22,9 @@ function MissionPhoto({ pillar, frameClass, stagger }) {
 }
 
 const collageFrames = [
-  'left-[4%] top-[14%] z-10 rotate-[7deg] sm:left-[10%] sm:top-[12%] lg:left-[12%] lg:top-[10%] lg:rotate-[8deg]',
+  'left-[10%] top-[14%] z-10 rotate-[7deg] sm:left-[10%] sm:top-[12%] lg:left-[12%] lg:top-[10%] lg:rotate-[8deg]',
   'left-1/2 top-0 z-30 -translate-x-1/2 rotate-0',
-  'right-[4%] top-[10%] z-20 -rotate-[7deg] sm:right-[10%] sm:top-[8%] lg:right-[12%] lg:top-[6%] lg:-rotate-[8deg]',
+  'right-[10%] top-[10%] z-20 -rotate-[7deg] sm:right-[10%] sm:top-[8%] lg:right-[12%] lg:top-[6%] lg:-rotate-[8deg]',
 ]
 
 export default function Mission() {
@@ -33,7 +33,7 @@ export default function Mission() {
   return (
     <section
       id="mission"
-      className="relative overflow-x-hidden bg-cream pt-12 pb-4 md:pt-16 md:pb-10 lg:pt-[3vw] lg:pb-[3vw]"
+      className="relative overflow-x-hidden bg-cream pt-12 pb-4 md:pt-16 md:pb-10 lg:pt-[3vw] lg:pb-[3vw] md:mt-16 mt-12 lg:mt-[4.5vw]"
     >
       <div className="relative w-full min-w-0 px-6 md:px-10 lg:px-[4vw]">
         <div
@@ -79,7 +79,7 @@ export default function Mission() {
           {/* Overlapping tilted photo stack — after closing line */}
           <div className="dash-border-t px-4 pb-0 pt-0 md:px-8 md:pb-0 md:pt-0 lg:px-[2vw] lg:pb-[0vw] lg:pt-[0vw]">
             <div
-              className="relative mx-auto h-[17rem] w-full max-w-xl sm:h-[19rem] md:h-[22rem] lg:h-[24vw] lg:max-w-none"
+              className="relative mx-auto h-[14rem] w-full max-w-[17rem] sm:h-[19rem] sm:max-w-xl md:h-[22rem] lg:h-[24vw] lg:max-w-none"
               aria-hidden="false"
             >
               {mission.pillars.map((pillar, index) => (

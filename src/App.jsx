@@ -2,7 +2,7 @@ import SmoothScroll from './components/SmoothScroll'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Hero from './components/sections/Hero'
-// import StatsBar from './components/sections/StatsBar'
+import StatsBar from './components/sections/StatsBar'
 import Mission from './components/sections/Mission'
 import Venue from './components/sections/Venue'
 import VenueGallery from './components/sections/VenueGallery'
@@ -20,7 +20,7 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        {/* <StatsBar /> */}
+        <StatsBar />
         <Mission />
         <Venue />
         <VenueGallery />

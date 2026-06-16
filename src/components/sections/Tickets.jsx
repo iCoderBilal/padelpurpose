@@ -12,20 +12,28 @@ function TicketFeature({ ticket, index }) {
               {String(index + 1).padStart(2, '0')}
             </span>
 
-            <p className="mt-8 font-sans text-[0.65rem] font-bold uppercase tracking-[0.32em] text-blue lg:mt-[1.5vw] lg:text-[0.68vw]">
-              {ticket.tagline}
-            </p>
-
-            <h3 className="mt-3 max-w-md font-hero text-3xl font-semibold uppercase leading-[1.08] tracking-[-0.02em] text-navy md:text-4xl lg:mt-[0.6vw] lg:text-[2.2vw]">
+            <h3 className="mt-8 max-w-md font-hero text-3xl font-semibold uppercase leading-[1.08] tracking-[-0.02em] text-navy md:text-4xl lg:mt-[1.5vw] lg:text-[2.2vw]">
               {ticket.name}
             </h3>
           </div>
 
           <div className="mt-10 lg:mt-0">
-            <p className="max-w-2xl font-hero-body text-sm leading-[1.85] text-ink/60 md:text-base lg:max-w-[42vw] lg:text-[0.92vw] lg:leading-[1.9]">
-              {ticket.includes.map((item, i) => (
-                <span key={item}>
-                  {i > 0 ? ' ' : ''}✔️ {item}
+            <p className="flex max-w-2xl flex-wrap gap-x-3 gap-y-2 font-hero-body text-sm leading-relaxed text-ink/60 md:text-base lg:max-w-[42vw] lg:gap-x-[0.6vw] lg:gap-y-[0.4vw] lg:text-[0.92vw] lg:leading-[1.65]">
+              {ticket.includes.map((item) => (
+                <span key={item} className="inline-flex items-center gap-1.5 lg:gap-[0.35vw]">
+                  <svg
+                    className="h-3.5 w-3.5 shrink-0 text-navy lg:h-[0.85vw] lg:w-[0.85vw]"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                  {item}
                 </span>
               ))}
             </p>
@@ -65,13 +73,10 @@ export default function Tickets() {
   const ref = useReveal()
 
   return (
-    <section id="tickets" className="bg-cream py-16 md:py-20 lg:py-[5vw]">
+    <section id="tickets" className="bg-cream py-16 md:py-20 lg:py-[5vw] mt-12 md:mt-16 lg:mt-[4vw]">
       <div ref={ref} className="reveal mx-auto max-w-6xl px-6 md:px-10 lg:px-0 lg:max-w-[80vw]">
         <header className="flex flex-col gap-6 md:gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-[3vw]">
           <div>
-            <p className="font-sans text-xs font-bold uppercase tracking-[0.35em] text-blue lg:text-[0.82vw]">
-              {ticketsSection.label}
-            </p>
             <h2 className="mt-3 font-hero text-4xl font-black uppercase leading-[1.02] tracking-[-0.03em] text-navy md:text-5xl lg:mt-[0.6vw] lg:text-[3.4vw]">
               {ticketsSection.heading}
             </h2>
