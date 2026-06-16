@@ -182,7 +182,8 @@ export default function Venue() {
   if (reducedMotion) {
     return (
       <section id="venue" aria-label={venue.heading} className="relative w-full bg-navy py-12 md:py-16 lg:py-20">
-        <div className="relative mx-auto w-full max-w-[90vw] overflow-hidden">
+        <div className="relative mx-auto w-full max-w-[90vw] dash-border p-3 md:p-4 lg:p-[0.75vw]">
+          <div className="relative overflow-hidden">
           <img
             src="/venue-frames/desktop/frame-043.webp"
             alt=""
@@ -194,11 +195,11 @@ export default function Venue() {
 
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-12 px-6 py-12 md:px-10 lg:px-[4vw]">
             {venue.scrollSteps.map((step, i) => (
-              <div key={i} className="max-w-2xl text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] lg:max-w-[48vw]">
+              <div key={i} className="mx-auto max-w-2xl text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] lg:max-w-[70vw]">
                 {step.titleLines && (
-                  <h2 className="font-hero font-black uppercase leading-[1.05] tracking-[-0.02em] text-white">
+                  <h2 className="font-hero font-semibold uppercase leading-tight tracking-[-0.01em] text-white">
                     {step.titleLines.map((line) => (
-                      <span key={line} className="block text-[38px] md:text-5xl lg:text-[4.1vw]">
+                      <span key={line} className="block text-2xl md:text-3xl lg:text-[2.8vw]">
                         {line}
                       </span>
                     ))}
@@ -211,7 +212,7 @@ export default function Venue() {
                         ? 'mt-5 text-base md:text-lg lg:mt-[1.2vw] lg:text-[1.05vw] lg:leading-[1.65]'
                         : step.highlight
                           ? 'font-sans text-lg font-bold uppercase tracking-[0.08em] md:text-xl lg:text-[1.35vw] lg:tracking-[0.1vw]'
-                          : 'text-lg font-medium md:text-xl lg:text-[1.2vw] lg:leading-[1.65]'
+                          : 'text-lg md:text-lg lg:text-[1.6vw]'
                     }`}
                   >
                     {step.body}
@@ -228,6 +229,7 @@ export default function Venue() {
               </div>
             ))}
           </div>
+          </div>
         </div>
       </section>
     )
@@ -235,7 +237,8 @@ export default function Venue() {
 
   return (
     <section ref={sectionRef} id="venue" className="relative h-svh w-full overflow-hidden bg-[#FAF9F4]" aria-label={venue.heading}>
-      <div className="absolute inset-y-[6%] left-1/2 w-full max-w-[90vw] -translate-x-1/2 overflow-hidden md:inset-y-[8%] lg:inset-y-[10%]">
+      <div className="absolute inset-y-[6%] left-1/2 w-full max-w-[90vw] -translate-x-1/2 dash-border p-3 md:p-4 lg:p-[0.75vw] md:inset-y-[8%] lg:inset-y-[10%]">
+        <div className="relative h-full w-full overflow-hidden">
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" aria-hidden="true" />
 
         <div className="pointer-events-none absolute inset-0 bg-black/58" aria-hidden="true" />
@@ -248,11 +251,11 @@ export default function Venue() {
               className="absolute inset-0 flex items-center justify-center px-6 md:px-10 lg:px-[4vw]"
               style={{ opacity: 0 }}
             >
-              <div className="max-w-2xl text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] lg:max-w-[48vw]">
+              <div className="mx-auto max-w-2xl text-center drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)] lg:max-w-[70vw]">
                 {step.titleLines && (
-                  <h2 className="font-hero font-black uppercase leading-[1.05] tracking-[-0.02em] text-white">
+                  <h2 className="font-hero font-semibold uppercase leading-tight tracking-[-0.01em] text-white">
                     {step.titleLines.map((line) => (
-                      <span key={line} className="block text-[38px] md:text-5xl lg:text-[4.1vw]">
+                      <span key={line} className="block text-3xl md:text-4xl lg:text-[3.5vw]">
                         {line}
                       </span>
                     ))}
@@ -260,12 +263,12 @@ export default function Venue() {
                 )}
                 {step.body && (
                   <p
-                    className={`font-hero-body leading-relaxed text-white ${
+                    className={`font-hero-body leading-relaxed text-white lg:max-w-[45vw] ${
                       step.titleLines
                         ? 'mt-5 text-base md:text-lg lg:mt-[1.2vw] lg:text-[1.05vw] lg:leading-[1.65]'
                         : step.highlight
                           ? 'font-sans text-lg font-bold uppercase tracking-[0.08em] md:text-xl lg:text-[1.35vw] lg:tracking-[0.1vw]'
-                          : 'text-lg font-medium md:text-xl lg:text-[1.2vw] lg:leading-[1.65]'
+                          : 'text-md md:text-lg lg:text-[1.2vw]'
                     }`}
                   >
                     {step.body}
@@ -288,6 +291,7 @@ export default function Venue() {
           <p className="font-sans text-xs uppercase tracking-[0.25em] text-white/60 lg:text-[0.75vw]">
             Scroll to explore
           </p>
+        </div>
         </div>
       </div>
     </section>

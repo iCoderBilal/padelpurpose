@@ -50,36 +50,30 @@ function ProgramIcon({ name }) {
   }
 }
 
-function ScheduleItem({ time, event, icon }) {
+function ScheduleItem({ time, event, icon, index }) {
   return (
-    <li className="flex gap-4 md:gap-5 lg:gap-[1.2vw]">
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-lime bg-lime/15 text-navy lg:h-[2.8vw] lg:w-[2.8vw]">
-        <ProgramIcon name={icon} />
-      </div>
-
-      <div className="min-w-0 flex-1">
-        <p className="font-sans text-sm font-bold text-blue md:text-base lg:text-[1.05vw]">
-          {time}
-        </p>
-
-        <div className="mt-2 flex items-center gap-1 lg:mt-[0.5vw]">
-          <span className="h-0.5 flex-1 bg-lime" aria-hidden="true" />
-          <svg
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            fill="none"
-            aria-hidden="true"
-            className="shrink-0 text-lime lg:h-[0.65vw] lg:w-[0.65vw]"
-          >
-            <path d="M2 5h6M6 3l2 2-2 2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+    <li className="relative">
+      <article className="flex h-full flex-col border border-dashed border-white/20 bg-[#001833]/70 p-6 transition-colors duration-300 hover:border-white/35 hover:bg-[#001833] md:p-7 lg:p-[1.6vw]">
+        <div className="flex items-start justify-between gap-4">
+          <span className="font-sans text-[0.65rem] font-bold tabular-nums tracking-[0.35em] text-white/30 lg:text-[0.65vw]">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-white/40 bg-white/5 text-white lg:h-[2.5vw] lg:w-[2.5vw]">
+            <ProgramIcon name={icon} />
+          </div>
         </div>
 
-        <p className="mt-3 font-hero text-xl font-medium leading-snug text-navy md:text-2xl lg:mt-[0.7vw] lg:text-[1.45vw]">
+        <time
+          dateTime={time}
+          className="mt-6 block font-sans text-sm font-bold uppercase tracking-[0.14em] text-lime md:text-base lg:mt-[1.2vw] lg:text-[1vw]"
+        >
+          {time}
+        </time>
+
+        <p className="mt-3 font-hero text-xl font-medium leading-snug text-white/95 md:text-lg lg:mt-[0.75vw] lg:text-[1.05vw] lg:leading-[1.35]">
           {event}
         </p>
-      </div>
+      </article>
     </li>
   )
 }
@@ -88,15 +82,34 @@ export default function Program() {
   const ref = useReveal()
 
   return (
-    <section id="program" className="bg-cream py-16 md:py-24 lg:py-[6vw]">
-      <div ref={ref} className="reveal mx-auto max-w-4xl px-6 md:px-10 lg:max-w-[58vw] lg:px-[4vw]">
-        <h2 className="text-center font-hero text-4xl font-black uppercase tracking-[-0.02em] text-navy md:text-5xl lg:text-[3vw]">
-          {program.heading}
-        </h2>
+    <section id="program" className="bg-[#001224] pb-16 md:pb-20 lg:pb-[5vw]">
+      <div ref={ref} className="reveal mx-auto max-w-7xl px-6 md:px-10 lg:max-w-[80vw] lg:px-0">
+        <header className="text-center">
+          <h2 className="font-hero text-4xl font-black uppercase tracking-[-0.02em] text-white md:text-5xl lg:text-[3vw]">
+            <span className="inline-block bg-lime px-2 py-1 font-sans text-sm font-semibold text-navy md:px-2.5 md:py-1.5 md:text-base lg:px-[0.5vw] lg:py-[0.35vw] lg:text-[1.05vw]">
+              {program.heading}
+            </span>
+          </h2>
 
-        <ol className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-12 lg:mt-[3vw] lg:gap-x-[2.5vw] lg:gap-y-[2.5vw]">
-          {program.schedule.map((item) => (
-            <ScheduleItem key={item.time} time={item.time} event={item.event} icon={item.icon} />
+          <div
+            className="mx-auto mt-8 flex max-w-xs items-center justify-center gap-3 lg:mt-[2vw] lg:max-w-[16vw] lg:gap-[0.8vw]"
+            aria-hidden="true"
+          >
+            <span className="h-px flex-1 border-t border-dashed border-white/25" />
+            <span className="h-1.5 w-1.5 rounded-full bg-lime lg:h-[0.45vw] lg:w-[0.45vw]" />
+            <span className="h-px flex-1 border-t border-dashed border-white/25" />
+          </div>
+        </header>
+
+        <ol className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-4 lg:mt-[3.5vw] lg:gap-[0.8vw]">
+          {program.schedule.map((item, index) => (
+            <ScheduleItem
+              key={item.time}
+              index={index}
+              time={item.time}
+              event={item.event}
+              icon={item.icon}
+            />
           ))}
         </ol>
       </div>

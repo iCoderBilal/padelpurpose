@@ -12,7 +12,6 @@ import Sponsorship from './components/sections/Sponsorship'
 import PastEvents from './components/sections/PastEvents'
 import Press from './components/sections/Press'
 import Contact from './components/sections/Contact'
-import StickyCTA from './components/ui/StickyCTA'
 
 export default function App() {
   return (
@@ -33,7 +32,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-      <StickyCTA />
     </>
   )
 }

@@ -171,10 +171,18 @@
   animation: cinemaRise 1.05s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.scroll-reveal-word {
+.scroll-reveal-word,
+.scroll-reveal-item {
   opacity: 0.12;
+}
+
+.scroll-reveal-word {
   display: inline;
   white-space: normal;
+}
+
+.scroll-reveal-item {
+  transition: opacity 150ms ease-out;
 }
 
 body.venue-scroll-active #site-header {
@@ -242,7 +250,8 @@ body.lightbox-open {
     transform: none;
   }
 
-  .scroll-reveal-word {
+  .scroll-reveal-word,
+  .scroll-reveal-item {
     opacity: 1 !important;
   }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useMemo } from 'react'
-import { getLenis } from '../SmoothScroll'
+import { getScrollRevealOpacity, subscribeScrollReveal } from '../../utils/scrollReveal'
 
 function splitWords(text) {
   return text.trim().split(/\s+/).filter(Boolean)
@@ -21,38 +21,14 @@ export function ScrollRevealParagraph({ text, className = '' }) {
     }
 
     const update = () => {
-      const vh = window.innerHeight
-      // Full opacity when word reaches mid-screen; starts revealing from below viewport
-      const targetLine = vh * 0.5
-      const startLine = vh * 1.05
-
       wordRefs.current.forEach((el) => {
         if (!el) return
-        const { top, bottom } = el.getBoundingClientRect()
-        const center = (top + bottom) / 2
-        const progress = (startLine - center) / (startLine - targetLine)
-        const opacity = Math.min(1, Math.max(0.12, progress))
-        el.style.opacity = String(opacity)
+        el.style.opacity = String(getScrollRevealOpacity(el))
       })
     }
 
-    let scrollCleanup = () => {}
-    const lenis = getLenis()
-    if (lenis) {
-      lenis.on('scroll', update)
-      scrollCleanup = () => lenis.off('scroll', update)
-    } else {
-      window.addEventListener('scroll', update, { passive: true })
-      scrollCleanup = () => window.removeEventListener('scroll', update)
-    }
-
     update()
-    window.addEventListener('resize', update, { passive: true })
-
-    return () => {
-      scrollCleanup()
-      window.removeEventListener('resize', update)
-    }
+    return subscribeScrollReveal(update)
   }, [words])
 
   return (

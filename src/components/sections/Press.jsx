@@ -22,9 +22,15 @@ export default function Press() {
               key={item.publication + item.headline}
               className="bg-navy p-7 transition-colors duration-300 hover:bg-white/[0.04]"
             >
-              <p className="font-sans text-[0.7rem] font-bold uppercase tracking-[0.2em] text-lime">
-                {item.publication}
-              </p>
+              <div className="flex min-h-10 items-center">
+                <img
+                  src={item.logo}
+                  alt={item.publication}
+                  className="h-8 w-auto max-w-[180px] object-contain object-left brightness-0 invert"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
               <p className="mt-4 font-serif text-base italic leading-relaxed text-white/85">
                 &ldquo;{item.headline}&rdquo;
               </p>

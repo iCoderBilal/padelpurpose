@@ -68,7 +68,7 @@ export default function LightboxGallery({ images, open, index, onClose, onIndexC
       role="dialog"
       aria-modal="true"
       aria-label="Image gallery"
-      className="lightbox-backdrop fixed inset-0 z-[120] flex flex-col bg-black/95"
+      className="lightbox-backdrop fixed inset-0 z-[120] flex flex-col bg-black"
     >
       <button
         type="button"
@@ -119,9 +119,6 @@ export default function LightboxGallery({ images, open, index, onClose, onIndexC
             alt={image.alt}
             className="max-h-[68vh] w-auto max-w-[min(92vw,1100px)] object-contain md:max-h-[72vh] lg:max-h-[74vh]"
           />
-          <figcaption className="mt-4 max-w-xl px-4 text-center font-hero-body text-sm leading-relaxed text-white/70 md:mt-5 md:text-base lg:mt-[1vw] lg:text-[0.95vw]">
-            {image.alt}
-          </figcaption>
         </figure>
 
         <LightboxControl

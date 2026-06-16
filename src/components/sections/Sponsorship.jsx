@@ -9,7 +9,7 @@ export default function Sponsorship() {
   return (
     <section
       id="sponsors"
-      className="relative overflow-hidden bg-sand pt-16 pb-24 md:pt-20 md:pb-32 lg:pt-[5vw] lg:pb-[8vw]"
+      className="relative overflow-hidden bg-cream pt-16 pb-24 md:pt-20 md:pb-32 lg:pt-[5vw] lg:pb-[8vw]"
     >
       <div ref={ref} className="reveal px-6 md:px-10 lg:px-[4vw]">
         <div className="mx-auto grid max-w-5xl gap-10 lg:max-w-[72vw] lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-[3vw]">

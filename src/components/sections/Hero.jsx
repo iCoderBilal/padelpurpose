@@ -74,8 +74,15 @@ export default function Hero() {
     >
       <div ref={contentRef} className="lg:will-change-transform">
         <div className="px-4 text-center md:px-10 lg:px-[4vw]">
+          <p
+            className="cinema font-sans text-xs font-bold uppercase tracking-[0.28em] text-navy md:text-sm lg:text-[0.9vw] lg:tracking-[0.24vw]"
+            style={{ animationDelay: '0.05s' }}
+          >
+            {event.heroKicker}
+          </p>
+
           <h1
-            className="cinema font-hero text-[44px] leading-[1.1] font-black uppercase tracking-[-0.02em] text-navy md:text-6xl lg:text-[5vw]"
+            className="cinema mt-4 font-hero text-[44px] leading-[1.1] font-black uppercase tracking-[-0.02em] text-navy md:mt-5 md:text-5xl lg:mt-[1vw] lg:text-[5vw]"
             style={{ animationDelay: '0.15s' }}
           >
             {event.heroHeading}
@@ -96,7 +103,7 @@ export default function Hero() {
 
         <div
           ref={collageRef}
-          className="mx-auto mt-9 max-w-7xl overflow-hidden px-6 md:px-12 lg:mt-[4vw] lg:max-w-[88vw] lg:px-[3vw] lg:will-change-transform"
+          className="mx-auto mt-9 max-w-7xl overflow-hidden px-6 md:px-12 lg:mt-[4vw] lg:max-w-[80vw] lg:px-[3vw] lg:will-change-transform"
         >
           <div className="cinema" style={{ animationDelay: '0.55s' }}>
             <div className="flex items-end justify-center">

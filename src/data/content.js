@@ -8,6 +8,7 @@ export const event = {
   intro:
     'The Brady Hunter Foundation presents its annual Hamptons charity fundraiser',
   edition: 'Third edition · Second Hamptons event',
+  heroKicker: 'The Brady Hunter Foundation Presents',
   heroHeading: 'Padel for a Purpose',
   heroDescriptionLine1: 'August 2, 2026 · Private Residence, Bridgehampton',
   heroDescriptionLine2: 'Pro-Am Padel Tournament & Pool Party — a day of sport, sun, and purpose.',
@@ -34,6 +35,20 @@ export const stats = [
 
 export const mission = {
   heading: 'Our Mission',
+  pillars: [
+    {
+      src: '/images/mission-3.jpg',
+      alt: 'Veterinary care for animals in need',
+    },
+    {
+      src: '/images/mission-2.jpg',
+      alt: 'Fresh produce distributed through food rescue programs',
+    },
+    {
+      src: '/images/mission-1.jpg',
+      alt: 'Children supported by foundation programs',
+    },
+  ],
   lines: [
     'Sport brings people together. But purpose is why we play.',
     'The Brady Hunter Foundation protects animals, empowers children, combats food insecurity, and conserves our planet — founded by Josh Fox in memory of Brady and Hunter, and built on compassion every single day.',
@@ -45,12 +60,6 @@ export const mission = {
     'The Brady Hunter Foundation is dedicated to protecting animals, supporting and empowering children, combating food insecurity in underserved communities, and conserving our planet and its natural resources. Founded by Josh Fox in memory of his two beloved dogs, Brady and Hunter, the Foundation honors their legacy through compassion, action, and a commitment to inspiring others to become changemakers every single day.',
     'Our signature fundraising event, Padel for a Purpose, returns for the third time and marks our second event in the Hamptons. This event brings people together through sport to champion the voiceless and drive meaningful, lasting impact.',
     'This year, our focus is on building a one-of-a-kind animal sanctuary in South Florida. This sanctuary will provide a forever home for both farm animals and harder-to-adopt dogs who have been overlooked in shelters, giving them the care, safety, and life they deserve.',
-  ],
-  images: [
-    { src: '/images/mission-1.svg', alt: 'Community food support and fresh produce distribution' },
-    { src: '/images/mission-2.svg', alt: 'Brady Hunter Foundation community dedication event' },
-    { src: '/images/mission-3.svg', alt: 'Children supported by foundation programs' },
-    { src: '/images/mission-4.svg', alt: 'Veterinary care for animals in need' },
   ],
 }
 
@@ -80,12 +89,12 @@ export const venue = {
 }
 
 export const venueGallery = [
+  { src: '/images/prop-5.jpg', alt: 'Bright bedroom with vaulted ceilings and meadow views' },
+  { src: '/images/prop-6.jpg', alt: 'Sun-drenched living room with white sofas' },
   { src: '/images/prop-1.webp', alt: 'Exterior of the Bridgehampton estate with manicured lawn' },
   { src: '/images/prop-2.webp', alt: 'Tennis court at the private residence' },
   { src: '/images/prop-3.webp', alt: 'Aerial view of the estate and surrounding grounds' },
   { src: '/images/prop-4.webp', alt: 'Resort-style pool on the lawn' },
-  { src: '/images/prop-5.jpg', alt: 'Bright bedroom with vaulted ceilings and meadow views' },
-  { src: '/images/prop-6.jpg', alt: 'Sun-drenched living room with white sofas' },
   { src: '/images/prop-7.webp', alt: 'Modern kitchen and dining area with exposed beams' },
 ]
 
@@ -102,49 +111,44 @@ export const program = {
 export const ticketsSection = {
   label: 'Registration',
   heading: 'Reserve Your Place',
-  subtitle:
-    'Join us for an unforgettable day of sport, celebration, and philanthropy on a private Bridgehampton estate.',
+  subtitle: 'Two ways to join — spectate or play — on a private Bridgehampton estate.',
   note: '100% of your purchase supports The Brady Hunter Foundation — processed securely through Zeffy.',
 }
 
 export const tickets = [
   {
     id: 'attendee',
-    tagline: 'Pool Party & Spectator Access',
-    name: 'Event Attendee Ticket',
+    tagline: 'Pool Party & Spectator',
+    name: 'Event Attendee',
     price: '$150',
     highlight: false,
-    description:
-      'Not playing? No problem. Join us as a spectator and enjoy an unforgettable day with full access to all the off-court excitement.',
+    image: '/images/ticket-1.jpg',
     includes: [
       'Open bar',
       'Delicious chef-curated food',
       'Live DJ and entertainment',
       'Access to watch top pros compete',
-      'Pool party access',
       'Great networking opportunities',
+      'Pool party access',
+      'And more surprises throughout the day.',
     ],
-    disclaimer:
-      'All or a portion of your contribution may be tax-deductible. Please consult your tax advisor.',
   },
   {
     id: 'player',
-    tagline: 'Pro-Am Tournament Player',
-    name: 'VIP Amateur Player Ticket',
+    tagline: 'Pro-Am Player',
+    name: 'VIP Amateur Player',
     price: '$2,000',
     highlight: true,
-    description:
-      'Play alongside world-class athletes, local padel lovers, and celebrity guests, all while supporting an important cause.',
+    image: '/images/ticket-2.jpg',
     includes: [
       'Participation in competitive padel matches',
-      'Open bar & pool party access',
+      'Open bar',
+      'Pool party access',
       'Delicious chef-curated food',
       'Live DJ and entertainment',
-      'Off-court activities & networking',
-      'Surprises throughout the day',
+      'Access to off-court activities and networking opportunities',
+      'And surprises throughout the day',
     ],
-    disclaimer:
-      'No experience required — just bring your energy, your heart, and your love for giving back.',
   },
 ]
 
@@ -284,22 +288,24 @@ export const pastEvents = [
     id: 'hamptons',
     label: 'Hamptons 2025',
     stat: '200+ in attendance at our first Hamptons fundraiser',
+    videoUrl: 'https://www.instagram.com/reels/DOJoAjajm89/',
     images: [
-      { src: '/images/gallery-1.svg', alt: 'Padel tournament winners on court at night' },
-      { src: '/images/gallery-2.svg', alt: 'Guest with dog at Brady Hunter Foundation event' },
-      { src: '/images/gallery-3.svg', alt: 'Guests at foundation step and repeat' },
-      { src: '/images/gallery-4.svg', alt: 'Padel match action on outdoor court' },
+      { src: '/images/hero-1.jpg', alt: 'Guests and a dog at Padel for a Purpose' },
+      { src: '/images/hero-3.jpg', alt: 'Padel court action at golden hour' },
+      { src: '/images/hero-4.jpg', alt: 'Guests celebrating at the charity event' },
+      { src: '/images/hero-6.jpg', alt: 'Evening padel match under the lights' },
     ],
   },
   {
     id: 'miami',
     label: 'Miami 2026',
     stat: '600+ guests · 40+ sponsors · 15+ raffle items',
+    videoUrl: 'https://www.instagram.com/reels/DVRYyRujrJZ/',
     images: [
-      { src: '/images/gallery-5.svg', alt: 'Flyboard entertainment at Miami fundraiser' },
-      { src: '/images/gallery-6.svg', alt: 'Mobile golf simulator activation' },
-      { src: '/images/gallery-7.svg', alt: 'Sponsor activation booth at event' },
-      { src: '/images/gallery-8.svg', alt: 'Guests enjoying cocktails at pool party' },
+      { src: '/images/hero-2.jpg', alt: 'Friends gathered at the Padel for a Purpose pool party' },
+      { src: '/images/hero-5.jpg', alt: 'A dog with guests at the foundation event' },
+      { src: '/images/hero-8.jpg', alt: 'Friends gathered at the pool party' },
+      { src: '/images/hero-9.jpg', alt: 'Padel court action at golden hour' },
     ],
   },
 ]
@@ -307,34 +313,42 @@ export const pastEvents = [
 export const press = [
   {
     publication: "Dan's Papers",
+    logo: '/images/press/dans-papers.png',
     headline: 'The Brady Hunter Foundation Serves for a Cause',
   },
   {
     publication: 'Times Square Chronicles',
+    logo: '/images/press/times-square-chronicles.png',
     headline: 'The Padel Party Charity Of The Year!',
   },
   {
     publication: 'Impact Wealth',
+    logo: '/images/press/impact-wealth.png',
     headline: 'Game, Set, Match! Padel for a Purpose Hits East Hampton',
   },
   {
     publication: '27east',
+    logo: '/images/press/27east.png',
     headline: 'Padel for a Purpose Hits East Hampton',
   },
   {
     publication: 'RESIDENT',
+    logo: '/images/press/resident.png',
     headline: 'Where Sport, Style, and Philanthropy Converged in Miami',
   },
   {
     publication: 'Haute Living',
+    logo: '/images/press/haute-living.png',
     headline: 'Where Sport, Style, and Philanthropy Converged in Miami',
   },
   {
     publication: "L'Etage Magazine",
+    logo: '/images/press/letage.jpg',
     headline: 'Padel for Purpose Unites Miami for Animals and Children',
   },
   {
     publication: '39 WSFL',
+    logo: '/images/press/wsfl.png',
     headline: 'Brady Hunter Foundation brings Padel for Purpose to Miami',
   },
 ]

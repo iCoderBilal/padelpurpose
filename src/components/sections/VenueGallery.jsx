@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { venueGallery } from '../../data/content'
 import LightboxGallery from '../ui/LightboxGallery'
 
-const START_INDEX = 4
+const START_INDEX = 0
 
 function useVisibleCount() {
   const [count, setCount] = useState(3)
@@ -72,8 +72,8 @@ export default function VenueGallery() {
 
   return (
     <>
-      <section id="venue-gallery" aria-label="Estate gallery" className="bg-navy py-10 md:py-14 lg:py-[3vw]">
-        <div className="mx-auto flex items-center gap-3 px-4 md:gap-4 md:px-8 lg:gap-[1vw] lg:px-[3vw]">
+      <section id="venue-gallery" aria-label="Estate gallery" className="bg-[#001224] py-10 md:py-14 lg:py-[3vw]">
+        <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 md:gap-4 md:px-8 lg:max-w-[89vw] lg:gap-[1vw] lg:px-0">
           <ArrowButton direction="prev" onClick={prev} disabled={index === 0} />
 
           <div className="min-w-0 flex-1 overflow-hidden">
