@@ -1,5 +1,98 @@
+import { useRef, useState } from 'react'
 import { pastEvents } from '../../data/content'
 import { useReveal } from '../../hooks/useReveal'
+
+function EventGallery({ images }) {
+  const [index, setIndex] = useState(0)
+  const drag = useRef({ startX: 0, active: false, moved: false })
+  const maxIndex = images.length - 1
+
+  const onPointerDown = (e) => {
+    drag.current = { startX: e.clientX, active: true, moved: false }
+    e.currentTarget.setPointerCapture(e.pointerId)
+  }
+  const onPointerMove = (e) => {
+    if (!drag.current.active) return
+    if (Math.abs(e.clientX - drag.current.startX) > 8) drag.current.moved = true
+  }
+  const onPointerUp = (e) => {
+    if (!drag.current.active) return
+    const delta = e.clientX - drag.current.startX
+    drag.current.active = false
+    if (Math.abs(delta) > 50) {
+      if (delta < 0) setIndex((i) => Math.min(maxIndex, i + 1))
+      else setIndex((i) => Math.max(0, i - 1))
+    }
+  }
+
+  return (
+    <>
+      {/* Mobile: swipeable carousel */}
+      <div className="md:hidden">
+        <div
+          className="cursor-grab overflow-hidden active:cursor-grabbing select-none"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerLeave={onPointerUp}
+        >
+          <div
+            className="flex transition-transform duration-500 ease-out"
+            style={{ transform: `translateX(-${index * 100}%)` }}
+          >
+            {images.map((img) => (
+              <div key={img.src} className="w-full shrink-0">
+                <div className="overflow-hidden border border-navy/10 bg-white shadow-soft">
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    loading="lazy"
+                    width={800}
+                    height={256}
+                    className="block h-52 w-full object-cover"
+                    draggable="false"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Dots */}
+        <div className="mt-4 flex justify-center gap-2" aria-label="Event image pagination">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setIndex(i)}
+              aria-label={`View photo ${i + 1}`}
+              aria-current={i === index ? 'true' : undefined}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === index ? 'w-5 bg-navy' : 'w-1.5 bg-navy/30'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Tablet/Desktop: 4-col grid */}
+      <div className="hidden md:grid md:grid-cols-4 md:gap-3 lg:gap-[0.6vw]">
+        {images.map((img) => (
+          <div key={img.src} className="overflow-hidden border border-navy/10 bg-white shadow-soft">
+            <img
+              src={img.src}
+              alt={img.alt}
+              loading="lazy"
+              width={400}
+              height={208}
+              className="block h-52 w-full lg:h-[13vw] lg:w-full"
+            />
+          </div>
+        ))}
+      </div>
+    </>
+  )
+}
 
 export default function PastEvents() {
   const ref = useReveal()
@@ -11,7 +104,6 @@ export default function PastEvents() {
           <h2 className="mt-4 font-hero text-4xl font-black uppercase leading-[1.05] tracking-[-0.02em] text-navy md:text-5xl lg:mt-[1vw] lg:text-[3.2vw]">
             Past Events
           </h2>
-
           <p className="mt-5 font-hero-body text-base leading-relaxed text-ink/70 md:text-lg lg:mt-[1.2vw] lg:text-[1.05vw] lg:leading-[1.65]">
             From the Hamptons to Miami — Padel for a Purpose continues to grow.
           </p>
@@ -26,10 +118,6 @@ export default function PastEvents() {
                 </h3>
 
                 <div className="flex flex-col items-start gap-3 sm:items-end">
-                  {/* <p className="font-hero-body text-sm leading-relaxed text-ink/55 md:text-base lg:text-[0.95vw]">
-                    {evt.stat}
-                  </p> */}
-
                   {evt.videoUrl && (
                     <a
                       href={evt.videoUrl}
@@ -37,13 +125,7 @@ export default function PastEvents() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2.5 border border-navy bg-navy px-6 py-3 font-sans text-[0.65rem] font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-transparent hover:text-navy lg:px-[1.2vw] lg:py-[0.65vw] lg:text-[0.68vw]"
                     >
-                      <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M8 5v14l11-7z" />
                       </svg>
                       Watch Recap Video
@@ -53,18 +135,7 @@ export default function PastEvents() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2.5 md:grid-cols-4 md:gap-3 lg:gap-[0.6vw]">
-                {evt.images.map((img) => (
-                  <div key={img.src} className="overflow-hidden border border-navy/10 bg-white shadow-soft">
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      loading="lazy"
-                      className="block h-44 w-full sm:h-48 md:h-52 lg:h-[13vw]"
-                    />
-                  </div>
-                ))}
-              </div>
+              <EventGallery images={evt.images} />
             </article>
           ))}
         </div>

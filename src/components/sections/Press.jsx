@@ -3,8 +3,8 @@ import { useReveal } from '../../hooks/useReveal'
 
 function PressLogo({ publication, logo, wide = false, url }) {
   const imageClass = wide
-    ? 'h-11 w-auto max-w-[360px] object-contain opacity-90 transition-opacity duration-300 group-hover:opacity-100 md:h-12 md:max-w-[440px] lg:h-[3.2vw] lg:max-w-[28vw]'
-    : 'h-9 w-auto max-w-[150px] object-contain opacity-90 transition-opacity duration-300 group-hover:opacity-100 md:h-10 md:max-w-[170px] lg:h-[2.5vw] lg:max-w-[11vw]'
+    ? 'h-11 w-[360px] opacity-90 transition-opacity duration-300 group-hover:opacity-100 md:h-12 md:w-[440px] lg:h-[3.2vw] lg:w-[28vw]'
+    : 'h-9 w-[150px] opacity-90 transition-opacity duration-300 group-hover:opacity-100 md:h-10 md:w-[170px] lg:h-[2.5vw] lg:w-[11vw]'
 
   const image = (
     <img

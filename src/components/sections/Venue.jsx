@@ -189,7 +189,9 @@ export default function Venue() {
             src="/venue-frames/desktop/frame-043.webp"
             alt=""
             aria-hidden="true"
-            className="aspect-[3/4] w-full object-cover md:aspect-video"
+            width={1280}
+            height={720}
+            className="block h-[480px] w-full md:h-[540px] md:w-full"
           />
 
           <div className="pointer-events-none absolute inset-0 bg-black/58" aria-hidden="true" />

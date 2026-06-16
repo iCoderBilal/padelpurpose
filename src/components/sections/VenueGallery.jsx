@@ -78,7 +78,9 @@ export default function VenueGallery() {
         </p>
 
         <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 md:gap-4 md:px-8 lg:max-w-[89vw] lg:gap-[1vw] lg:px-0">
-          <ArrowButton direction="prev" onClick={prev} disabled={index === 0} />
+          <div className="hidden md:flex">
+            <ArrowButton direction="prev" onClick={prev} disabled={index === 0} />
+          </div>
 
           <div className="min-w-0 flex-1 overflow-hidden">
             <div
@@ -88,7 +90,7 @@ export default function VenueGallery() {
               {venueGallery.map((image, imageIndex) => (
                 <div
                   key={image.src}
-                  className="shrink-0 px-1.5 md:px-2 lg:px-[0.5vw]"
+                  className="shrink-0 px-1 md:px-2 lg:px-[0.5vw]"
                   style={{ width: `${slideWidth}%` }}
                 >
                   <button
@@ -97,21 +99,39 @@ export default function VenueGallery() {
                     aria-label={`View full size: ${image.alt}`}
                     className="relative block w-full cursor-pointer overflow-hidden border border-navy/10 bg-sand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime"
                   >
-                    <div>
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        loading="lazy"
-                        className="h-[250px] w-full"
-                      />
-                    </div>
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      loading="lazy"
+                      width={800}
+                      height={220}
+                      className="block h-[220px] w-full md:h-[260px] md:w-full lg:h-[16vw] lg:w-full"
+                    />
                   </button>
                 </div>
               ))}
             </div>
           </div>
 
-          <ArrowButton direction="next" onClick={next} disabled={index >= maxIndex} />
+          <div className="hidden md:flex">
+            <ArrowButton direction="next" onClick={next} disabled={index >= maxIndex} />
+          </div>
+        </div>
+
+        {/* Dot pagination — mobile only */}
+        <div className="mt-5 flex justify-center gap-2 md:hidden" aria-label="Gallery pagination">
+          {Array.from({ length: maxIndex + 1 }, (_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setIndex(i)}
+              aria-label={`View image ${i + 1}`}
+              aria-current={i === index ? 'true' : undefined}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === index ? 'w-5 bg-navy' : 'w-1.5 bg-navy/30'
+              }`}
+            />
+          ))}
         </div>
       </section>
 

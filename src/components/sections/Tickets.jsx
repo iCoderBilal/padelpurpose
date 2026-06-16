@@ -33,7 +33,7 @@ function GetTicketButton({ className = '' }) {
 function TicketFeature({ ticket, index }) {
   return (
     <article className="overflow-hidden border border-navy/10 bg-white shadow-soft">
-      <div className="grid min-h-[22rem] grid-cols-1 lg:min-h-[26vw] lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="grid min-h-[22rem] grid-cols-1 md:grid-cols-[1.15fr_0.85fr] lg:min-h-[26vw]">
         <div className="flex flex-col justify-between px-7 py-8 md:px-10 md:py-10 lg:px-[2.8vw] lg:py-[2.5vw]">
           <div>
             <span className="inline-flex h-10 w-10 items-center justify-center border border-dashed border-navy/25 font-sans text-xs font-bold tabular-nums tracking-[0.2em] text-navy/40 lg:h-[2.4vw] lg:w-[2.4vw] lg:text-[0.68vw]">
@@ -45,7 +45,7 @@ function TicketFeature({ ticket, index }) {
             </h3>
           </div>
 
-          <div className="mt-10 lg:mt-0">
+          <div className="mt-10 md:mt-0">
             <p className="flex max-w-2xl flex-wrap gap-x-3 gap-y-2 font-hero-body text-sm leading-relaxed text-ink/60 md:text-base lg:max-w-[42vw] lg:gap-x-[0.6vw] lg:gap-y-[0.4vw] lg:text-[0.92vw] lg:leading-[1.65]">
               {ticket.includes.map((item) => (
                 <span key={item} className="inline-flex items-center gap-1.5 lg:gap-[0.35vw]">
@@ -76,12 +76,14 @@ function TicketFeature({ ticket, index }) {
           </div>
         </div>
 
-        <div className="relative min-h-[14rem] bg-sand lg:min-h-full">
+        <div className="relative min-h-[14rem] overflow-hidden bg-sand md:min-h-full">
           <img
             src={ticket.image}
             alt=""
             loading="lazy"
-            className="absolute inset-0 h-full w-full object-cover"
+            width={800}
+            height={600}
+            className="block h-[14rem] w-full md:h-full md:min-h-[22rem] lg:min-h-[26vw] lg:w-full lg:object-cover"
           />
         </div>
       </div>

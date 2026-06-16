@@ -117,7 +117,9 @@ export default function LightboxGallery({ images, open, index, onClose, onIndexC
           <img
             src={image.src}
             alt={image.alt}
-            className="max-h-[68vh] w-auto max-w-[min(92vw,1100px)] object-contain md:max-h-[72vh] lg:max-h-[74vh]"
+            width={1100}
+            height={740}
+            className="block max-h-[68vh] w-auto max-w-[min(92vw,1100px)] md:max-h-[72vh] lg:max-h-[74vh]"
           />
         </figure>
 

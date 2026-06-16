@@ -23,7 +23,9 @@ export default function Header() {
             <img
               src="/images/bradyhunter-logo-black.png"
               alt="The Brady Hunter Foundation"
-              className="h-14 w-auto object-contain sm:h-16 md:h-16 lg:h-[5vw]"
+              width={320}
+              height={80}
+              className="h-14 w-28 sm:h-16 sm:w-32 md:h-16 md:w-32 lg:h-[5.5vw] lg:w-[10vw] object-cover"
             />
             <span className="font-serif text-xl text-navy/30 sm:text-2xl lg:text-[2vw]" aria-hidden="true">×</span>
             <PaddleIcon className="h-14 w-14 sm:h-16 sm:w-16 md:h-16 md:w-20 lg:h-[5vw] lg:w-[5vw]" />
